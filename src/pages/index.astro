@@ -1,11 +1,81 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const recentPosts = sortedPosts.slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="My Blog - Welcome">
+  <div class="space-y-12">
+    <!-- Hero Section -->
+    <section class="text-center py-16">
+      <h1 class="text-5xl font-bold text-gray-900 mb-6">
+        Welcome to My Blog
+      </h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        A personal space where I share my thoughts, experiences, and insights about technology, life, and everything in between.
+      </p>
+    </section>
+
+    <!-- Recent Posts -->
+    <section>
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Recent Posts</h2>
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {recentPosts.map((post) => (
+          <article class="group">
+            <a href={`/blog/${post.slug}`} class="block">
+              <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-6 h-full">
+                <div class="space-y-4">
+                  <div class="flex items-center space-x-2 text-sm text-gray-500">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </time>
+                    {post.data.tags && (
+                      <span class="text-blue-600">• {post.data.tags[0]}</span>
+                    )}
+                  </div>
+                  <h3 class="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {post.data.title}
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed">
+                    {post.data.description}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+      
+      {posts.length > 3 && (
+        <div class="text-center mt-8">
+          <a href="/blog" class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+            View All Posts
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      )}
+    </section>
+
+    <!-- About Section -->
+    <section class="bg-white rounded-lg shadow-sm p-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">About Me</h2>
+      <div class="prose prose-gray max-w-none">
+        <p class="text-lg text-gray-600 leading-relaxed">
+          I'm passionate about learning and sharing knowledge. This blog serves as a platform for me to document my journey and hopefully provide value to others along the way.
+        </p>
+        <p class="text-lg text-gray-600 leading-relaxed mt-4">
+          I write about technology, personal experiences, books I've read, and various topics that interest me. Feel free to explore and connect!
+        </p>
+      </div>
+    </section>
+  </div>
 </Layout>

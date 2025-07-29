@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Blog - All Posts" description="All blog posts">
+  <div class="max-w-4xl mx-auto">
+    <header class="mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Blog</h1>
+      <p class="text-xl text-gray-600">
+        All my thoughts, experiences, and insights in one place.
+      </p>
+    </header>
+
+    <div class="space-y-8">
+      {sortedPosts.map((post) => (
+        <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-6">
+          <a href={`/blog/${post.slug}`} class="block">
+            <div class="space-y-4">
+              <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {post.data.pubDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+                {post.data.tags && (
+                  <span class="text-blue-600">• {post.data.tags.join(', ')}</span>
+                )}
+              </div>
+              <h2 class="text-2xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
+                {post.data.title}
+              </h2>
+              <p class="text-gray-600 leading-relaxed">
+                {post.data.description}
+              </p>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-gray-600 text-lg">No posts yet. Check back soon!</p>
+      </div>
+    )}
+  </div>
+</Layout> 
