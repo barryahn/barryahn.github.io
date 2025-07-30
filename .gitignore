@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # blog contents
 src/content/blog/
+
+# images
+src/assets/images/
