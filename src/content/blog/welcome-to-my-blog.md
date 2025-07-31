@@ -1,6 +1,6 @@
 ---
 title: "Welcome to My Blog"
-description: "A personal space where I share my thoughts, experiences, and insights about technology, life, and everything in between."
+description: "The beginning"
 pubDate: 2025-07-30
 tags: ["introduction"]
 ---
