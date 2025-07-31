@@ -1,7 +1,7 @@
 ---
 title: "Welcome to My Blog"
 description: "The beginning"
-pubDate: 2025-07-30
+pubDate: 2025-07-28
 tags: ["introduction"]
 ---
 
