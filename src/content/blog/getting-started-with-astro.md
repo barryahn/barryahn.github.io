@@ -5,8 +5,6 @@ pubDate: 2024-01-16
 tags: ["astro", "web-development", "static-sites"]
 ---
 
-# Getting Started with Astro
-
 Recently, I decided to build my personal blog using Astro, and I'm excited to share my experience with this modern static site generator.
 
 ## Why Astro?
