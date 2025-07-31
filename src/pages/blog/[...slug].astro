@@ -16,9 +16,17 @@ const { Content } = await post.render();
 
 <Layout title={post.data.title} description={post.data.description}>
   <article class="max-w-3xl mx-auto">
-    <header class="mb-8">
-      <div class="flex items-center space-x-2 text-sm text-gray-500 mb-4">
-        <time datetime={post.data.pubDate.toISOString()}>
+    <header class="mt-12">
+
+      <h1 class="text-5xl text-gray-900 leading-tight">
+        {post.data.title}
+      </h1>
+      <p class="text-lg font-extralight text-gray-600 leading-relaxed">
+        {post.data.description}
+      </p>
+
+      <div class="flex items-center space-x-2 mt-12 text-sm font-extralight">
+        <time datetime={post.data.pubDate.toISOString()} class="text-gray-500">
           {post.data.pubDate.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -29,13 +37,10 @@ const { Content } = await post.render();
           <span class="text-blue-600">• {post.data.tags.join(', ')}</span>
         )}
       </div>
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">
-        {post.data.title}
-      </h1>
-      <p class="text-xl text-gray-600 leading-relaxed">
-        {post.data.description}
-      </p>
     </header>
+
+    
+    <hr class="border-gray-200 my-8" />
 
     <div class="prose prose-lg prose-gray max-w-none">
       <Content />
