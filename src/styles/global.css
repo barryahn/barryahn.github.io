@@ -1,6 +1,40 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@font-face {
+  font-family: "JejuMyeongjoOTF";
+  src: url("/fonts/JejuMyeongjoOTF.otf") format("otf");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  src: url("/fonts/NotoSansKR-VariableFont_wght.ttf") format("ttf");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/Pretendard-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-jeju-myeongjo: "JejuMyeongjoOTF", serif;
+  --font-noto-sans-kr: "NotoSansKR", sans-serif;
+  --font-pretendard: "Pretendard", sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-extra-light: 200;
+  --font-weight-extra-bold: 800;
 }
